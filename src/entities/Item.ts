@@ -35,11 +35,11 @@ export default class Item extends BaseEntity {
   @Column({ default: null })
   img: string;
 
-  @ManyToOne(() => Category, (category) => category.items)
+  @ManyToOne(() => Category, (category) => category.items,{nullable:true})
   category?: Category;
 
   // todo  rename
-  @Field(() => [Ingredient], { nullable: true })
+  @Field(() => [Ingredient])
   @ManyToMany(() => Ingredient, (ingredient) => ingredient.items, {
     onDelete: "NO ACTION",
     onUpdate: "NO ACTION",

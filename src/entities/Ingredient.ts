@@ -1,7 +1,6 @@
 import { Field, ID, ObjectType } from "type-graphql";
 import { BaseEntity, Entity, PrimaryGeneratedColumn, ManyToOne, Column, ManyToMany, JoinTable } from "typeorm";
 import Item from "./Item";
-import ItemToOrder from "./joins/ItemToOrder";
 
 @ObjectType()
 @Entity()

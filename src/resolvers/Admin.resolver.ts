@@ -24,6 +24,8 @@ import {
   TableUpdateInput,
 } from "../inputs/TableInputs";
 import IngredientToItem from "../entities/joins/IngredientToItem";
+import ItemToOrder from "../entities/joins/ItemToOrder";
+import Order from "../entities/Order";
 
 @Resolver()
 export default class AdminResolver {
@@ -66,13 +68,13 @@ export default class AdminResolver {
   @Query(() => [Item])
   async showItems(): Promise<Item[]> {
     return Item.find({
-      loadEagerRelations:true,
-      relations:['ingredients']
+      loadEagerRelations: true,
+      relations: ["ingredients"],
     });
   }
 
   @Mutation(() => Item, { nullable: true })
-  async addItem( 
+  async addItem(
     @Arg("data") data: ItemCreateInput,
     @Arg("categoryId") categoryId: number
   ): Promise<Item | null> {
@@ -217,5 +219,24 @@ export default class AdminResolver {
       console.log(error);
       return false;
     }
+  }
+  // ! Item to order
+  @Mutation(() => Boolean, { nullable: true })
+  async addItemToOrder(@Arg("itemId") itemId: number): Promise<Boolean> {
+    const order = Order.create({});
+    const {orderId} =await order.save();
+    const itemToOrder = ItemToOrder.create({ itemId, orderId });
+    const itemOrder = await itemToOrder.save();
+    console.log(itemOrder);
+    return true;
+  }
+  @Query(()=>[ItemToOrder])
+  async showOrders():Promise<ItemToOrder[]>{
+    const res =await ItemToOrder.find({
+      relations: ["items", "orders"],
+      loadEagerRelations: true,
+    })
+    console.log(res)
+    return res
   }
 }

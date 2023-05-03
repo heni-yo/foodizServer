@@ -2,6 +2,7 @@ import { Entity, PrimaryColumn, ManyToOne, JoinColumn, BaseEntity } from "typeor
 import Item from "../Item";
 import Ingredient from "../Ingredient";
 
+
 @Entity('itemToIngredient') // todo  rename
 export default class IngredientToItem extends BaseEntity {
   @PrimaryColumn({ name: 'itemId' })

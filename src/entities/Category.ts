@@ -19,7 +19,7 @@ export default class Category extends BaseEntity {
   @Column()
   categoryName: string;
 
-  @Field(()=>[Item],{nullable:true})
+  @Field(()=>[Item])
   @OneToMany(() => Item, (item) => item.category)
   items: Item[];
 } 

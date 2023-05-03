@@ -10,5 +10,5 @@ import ItemToOrder from "./joins/ItemToOrder";
 
 
 const entities : MixedList<string | Function | EntitySchema<any>>
-= [Category,Item,Ingredient,Table,IngredientToItem,Order]
+= [Category,Item,Ingredient,Table,IngredientToItem,Order,ItemToOrder]
 export default entities

@@ -19,7 +19,7 @@ export default class Order extends BaseEntity {
   @CreateDateColumn()
   date!: Date;
 
-  @Field(()=>[Item])
+  @Field(()=>[Item],{nullable:true})
   @ManyToMany(() => Item, (item) => item.orders)
   items: Item[];
 }
